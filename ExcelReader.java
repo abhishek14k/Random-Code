@@ -1,26 +1,62 @@
 package org.capgemini.plm;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+public class CloneExcel {
 
-public class ExcelReader {
+	public static void main(String[] args) {
+		
+		
+//		List<String> l1 = new ArrayList<String>();
+//		l1.add("R1000");
+//		l1.add("1290KTM");
+//		l1.add("BMW1000RR");
+//		l1.add("Panigale998");
+//		l1.add("ApriliaRSV4-RF");
+//		l1.add("Multistrada");
+//		
+//		for(int i=0; i<l1.size(); i++) {
+//			
+//		}
+//		
+//		if(f1.renameTo(f2)) {
+//			System.out.println("File renamed successfully!");
+//		}
+//		else {
+//			System.out.println("Rename failed!");
+//		}
+		
+		File f1 = new File("C:\\Users\\ABHISHEK R\\Desktop\\New\\Clone\\AgustaMVF3.txt");
+		File f2 = new File("C:\\Users\\ABHISHEK R\\Desktop\\New\\Clone\\BMW1000R.txt");
+		
+		File fOrig = new File("C:\\Users\\ABHISHEK R\\Desktop\\New\\Clone\\BMW1000R");
+		
+		File folder = new File("C:\\Users\\ABHISHEK R\\Desktop\\New\\Clone\\");
+		File[] listOfFiles = folder.listFiles();
 
-	public static void main(String[] args) throws IOException {
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        System.out.println(file.getName());
+		        
+		        if(file.getName().contains("1000")) {
+//		        	System.out.println("BMW??");
+		        	f1.renameTo(f2);
+		        }
+		    }
+		}
 		
-		FileInputStream fis = new FileInputStream(new File("Assignment1.xlsx"));
+		File fNew = new File("C:\\Users\\ABHISHEK R\\Desktop\\New\\Clone\\BMW1000R.txt");
 		
-		//to create a workbook instance
-		HSSFWorkbook wb = new HSSFWorkbook(fis);
-		
-		//to create a sheet object to retrieve the sheet
-		HSSFSheet sheet = wb.getSheetAt(0);
-		
-		
+		try {
+			Files.copy(fOrig.toPath(), fNew.toPath());
+		}
+		catch(IOException ie) {
+			ie.printStackTrace();
+		}
 		
 	}
 }
